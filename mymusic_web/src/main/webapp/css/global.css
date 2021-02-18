@@ -1,0 +1,540 @@
+html,
+body {
+	background: whitesmoke;
+	font-family: "microsoft yahei";
+	height: 100%;
+}
+
+tbody td {
+	vertical-align: middle;
+}
+
+font {
+	font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+
+
+.max-width{
+    width:100%;
+}
+.navbar-text a{
+    color: gray;
+}
+
+.footer {
+	z-index: 10;
+	height: 320px;
+	color: whitesmoke;
+	padding: 30px 40px 75px;
+	background: #3C3C3C;
+}
+.footer a{
+	color: whitesmoke;
+}
+a {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+}
+.minHeight{
+	min-height: 700px;
+}
+.maxHeight700{
+	max-height: 700px;
+}
+.maxHeight400{
+	max-height: 400px;
+}
+.navButton {
+	display: inline-block;
+}
+
+.navButton>li>a {
+	background: rgba(1, 1, 1, 0.2);
+	color: white;
+}
+
+.navBar {
+	margin-bottom: 0;
+	background: white;
+	box-shadow: 0px 1px 5px gray;
+}
+.minTd{
+	vertical-align: middle;
+	max-width: 90px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.widget {
+	background: #fff;
+	padding: 21px 30px;
+	margin-bottom: 35px;
+}
+
+.post {
+	background: #fff;
+	padding: 25px 35px 35px 35px;
+	position: relative;
+}
+
+.post>p {
+	text-indent: 2em;
+	font-size: 18px;
+}
+
+
+.footerText {
+	color: grey;
+	display: inline-block;
+	float: none;
+	font-size: 16px;
+}
+
+
+.mainFooter {
+	text-align: center;
+	background: #202020;
+	padding: 35px;
+	color: #959595;
+}
+
+.copyright {
+	background: #111;
+	text-align: center;
+	padding: 10px;
+}
+
+textarea {
+	resize: none;
+}
+
+table>tbody>tr>td {
+	vertical-align: middle;
+}
+
+.text-oneLine {
+	word-break: keep-all;
+	/* 不换行 */
+	white-space: nowrap;
+	/* 不换行 */
+	overflow: hidden;
+	/* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow: ellipsis;
+	/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+
+.fixBottom {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+.adminAvatar {
+	height: 30px;
+	width: 30px;
+}
+
+.adminAvatarWidget {
+	height: 40px;
+	width: 40px;
+}
+
+.operationText {
+	font-family: "微软雅黑";
+	color: ghostwhite;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	display: block;
+}
+
+.operationMinText {
+	font-family: "微软雅黑";
+	padding-left: 30px;
+	color: ghostwhite;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 500;
+	display: block;
+}
+
+.operationMinText {
+	font-family: "微软雅黑";
+	padding-left: 30px;
+	color: ghostwhite;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 500;
+	display: block;
+}
+
+.operationLi {
+	list-style-type: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.recommendedLi {
+	list-style-type: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.recommendedTitleLi {
+	list-style-type: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.recommendedLiTitle{
+	font-family: "微软雅黑";
+	padding-left: 10px;
+	padding-bottom: 5px;
+	color: #4a4a4a;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+	display: block;
+	border-bottom: solid 3px;
+	transition: 0.3s;
+}
+.recommendedMinText {
+	font-family: "微软雅黑";
+	padding-left: 10px;
+	color: #4a4a4a;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 400;
+	display: block;
+	transition: 0.3s;
+}
+.recommendedLi:hover{
+	color: orangered;
+	background: aliceblue;
+	font-size: 16px;
+}
+
+.operationLi:hover {
+	background-color: gray;
+}
+
+.selfWidget {
+	margin-top: 30px;
+	margin-left: 5px;
+	width: 224px;
+	height: 61px;
+	padding-top: 0px;
+	padding-bottom: 8px;
+	padding-left: 13px;
+	padding-right: 13px;
+}
+
+.widgetNameText {
+	color: ghostwhite;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.widgetOperationText {
+	color: #999999;
+	font-weight: 400;
+	font-size: 12px;
+}
+
+.widgetLogoutBox {
+	width: 72px;
+	height: 20px;
+	display: inline;
+	float: left;
+	margin-top: 1px;
+	cursor: pointer;
+}
+
+.asideBar {
+    position: absolute;
+	width: 250px;
+	height: 100%;
+	background: #3C3C3C;
+	margin-right: 17px;
+}
+
+.mainBar {
+    position: relative;
+	margin-left: 253px;
+	margin-top: 50px;
+}
+
+.avatarSmall {
+	height: 30px;
+	width: 30px;
+}
+
+.avatarMedium {
+	height: 40px;
+	width: 40px;
+}
+
+.avatarLarge {
+	height: 50px;
+	width: 50px;
+}
+
+.avatarController {
+	height: 80px;
+	width: 80px;
+}
+
+.coverSmall {
+	height: 50px;
+	width: 50px;
+}
+
+.coverMedium {
+	height: 75px;
+	width: 75px;
+}
+
+.coverBig {
+	height: 150px;
+	width: 150px;
+}
+
+.coverLarge {
+	height: 300px;
+	width: 300px;
+}
+
+.loginInput {
+	background: rgba(128, 128, 128, 0.2);
+	color: gainsboro;
+}
+
+.loginButton {
+	background: rgba(1, 1, 1, 0.5);
+	color: gainsboro;
+}
+
+.loginText {
+	color: gainsboro;
+}
+
+.inputWarningText {
+	color: crimson;
+}
+
+.loginContainer {
+	margin-top: 150px;
+	width: 350px;
+	background: rgba(1, 1, 1, 0);
+}
+
+.loginPanel {
+	padding: 21px 20px;
+	margin-bottom: 35px;
+}
+
+.coverBox {
+	position: relative;
+	width: 150px;
+	height: 150px;
+}
+
+.coverContent {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background: #f1f1f1;
+}
+
+.coverButtom {
+	font-size: 32px;
+	line-height: 40px;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+}
+
+.mediaBox {
+	position: relative;
+	width: 160px;
+	height: 230px;
+	margin: 5px 15px;
+
+	display: inline-block;
+}
+
+.mediaInfo {
+	position: absolute;
+	top: 150px;
+	padding-top: 5px;
+	padding-left: 10px;
+}
+
+.mediaName {
+	font-size: 14px;
+	font-weight: bold;
+	max-height: 40px;
+	overflow: hidden;
+}
+
+.mediaAuthor a{
+	font-size: 13px;
+	color: gray;
+}
+
+.mediaDate {
+	font-size: 13px;
+	color: grey;
+}
+
+.InputCoverBox {
+	position: relative;
+	width: 160px;
+	height: 150px;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+.InputCover3 {
+	position: absolute;
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	background: whitesmoke;
+	left: 81px;
+	top: 50%;
+	margin-top: -35px;
+	border-radius: 1%;
+	box-shadow: 1px 1px 5px gray;
+}
+
+.InputCover2 {
+	position: absolute;
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background: whitesmoke;
+	left: 45px;
+	top: 50%;
+	margin-top: -50px;
+	border-radius: 1%;
+	box-shadow: 1px 1px 5px gray;
+}
+
+.InputCover1 {
+	position: absolute;
+	display: inline-block;
+	width: 130px;
+	height: 130px;
+	top: 50%;
+	margin-top: -65px;
+	border-radius: 1%;
+	box-shadow: 1px 1px 5px gray;
+	background-size: 130px 130px;
+	background-repeat: no-repeat;
+	background-image: url("../assets/img/res/default-album.jpg");
+	background-color: whitesmoke;
+}
+
+.InputCoverClickNumBox {
+	position: absolute;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 16px;
+	width: 60px;
+	background: rgba(0, 0, 0, 0.9);
+	right: 5px;
+	top: 3px;
+	border-radius: 10%;
+	text-align: right;
+	font-size: 11px;
+	font-weight: bold;
+	color: whitesmoke;
+}
+
+.InputCoverClickNumBox span {
+	font-size: 10px;
+	font-weight: 400;
+}
+
+.InputCover1:hover .InputCoverOperationBar {
+	display: block;
+	cursor: pointer;
+}
+
+.InputCoverOperationBar {
+	position: absolute;
+	display: none;
+	transition: 0.3s;
+	z-index: 100;
+	width: 40px;
+	height: 40px;
+	top: 50%;
+	left: 50%;
+	margin-top: -20px;
+	margin-left: -20px;
+	font-size: 40px;
+}
+
+.InputCoverBtn {
+	position: absolute;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	top: 50%;
+	left: 50%;
+	margin-top: -15px;
+	margin-left: -15px;
+}
+
+.InputCoverBtn .glyphicon {
+	font-size: 30px;
+	color: grey;
+	transition: 0.3s;
+}
+
+.InputCoverBtn:hover{
+	cursor: pointer;
+}
+
+.InputCoverBtn .glyphicon {
+	font-size: 30px;
+	color: grey;
+	transition: 0.3s;
+}
+.InputCoverBtn .glyphicon:hover {
+	font-size: 30px;
+	color: #f5f5f5;
+	transition: 0.3s;
+}
+
+.notSelect {
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}

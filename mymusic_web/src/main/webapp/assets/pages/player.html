@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>播放器</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/gobal.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+		<style>
+			.playerBar {
+				background: white;
+				height: 75px;
+				border-top: 1px gainsboro;
+			}
+			
+			.controllerBar {
+				display: inline-block;
+				height: 74px;
+				width: 170px;
+				position: relative;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			
+			.preButton {
+				display: inherit;
+				position: absolute;
+				top: 50%;
+				margin-top: -15px;
+				filter: alpha(opacity=30);
+				margin-right: 10px;
+			}
+			
+			.playButton {
+				display: inherit;
+				position: absolute;
+				top: 50%;
+				margin-top: -27px;
+				left: 60px;
+				filter: alpha(opacity=30);
+				margin-right: 10px;
+			}
+			
+			.nextButton {
+				display: inherit;
+				position: absolute;
+				top: 50%;
+				margin-top: -15px;
+				left: 120px;
+				filter: alpha(opacity=30);
+				margin-right: 10px;
+			}
+			
+			.controllerBar .icon:hover,
+			.controllerBar .iconfont:hover {
+				cursor: pointer;
+				color: #dd2924;
+			}
+			
+			.processBar {
+				display: inline-block;
+				height: 74px;
+				width: 300px;
+				position: relative;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			
+			.processAll {
+				position: absolute;
+				top: 48%;
+				width: 280px;
+				height: 1px;
+				background: gainsboro;
+			}
+			
+			.processNow {
+				position: absolute;
+				top: 48%;
+				width: 0px;
+				height: 2px;
+				background-image: linear-gradient(to right, #ffffff, #FF3333);
+			}
+			
+			.processButton {
+				position: absolute;
+				top: 50%;
+				left: 0px;
+				width: 10px;
+				height: 10px;
+				margin-top: -5px;
+				border-radius: 50%;
+				box-shadow: 1px 1px 1px #888888;
+				background: #f06d6a;
+				cursor: pointer;
+			}
+			
+			.songInfoBar {
+				display: inline-block;
+				height: 74px;
+				width: 100px;
+				position: relative;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			
+			.songInfoBox {
+				display: inherit;
+				position: absolute;
+				top: 75%;
+				right: 10px;
+				margin-top: -10px;
+			}
+			
+			.songInfo {
+				font: "微软雅黑";
+				font-weight: 300;
+				font-size: 14px;
+				color: #ee8a87;
+			}
+			
+			.coverBar {
+				display: inline-block;
+				height: 74px;
+				width: 250px;
+				position: relative;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			
+			.coverBox {
+				display: inherit;
+				position: absolute;
+				top: 2px;
+			}
+			
+			.coverImg {
+				display: inherit;
+				width: 70px;
+				height: 70px;
+			}
+			
+			.coverMusicName {
+				font: "微软雅黑";
+				font-weight: 300;
+				font-size: 14px;
+				color: #0F0F0F;
+			}
+			
+			.coverMusicNameBox {
+				overflow: hidden;
+				display: inherit;
+				position: absolute;
+				height: 22px;
+				width: 150px;
+				left: 90px;
+				top: 15px;
+			}
+			
+			.coverAuthorName {
+				font: "微软雅黑";
+				font-weight: 300;
+				font-size: 13px;
+				color: gray;
+			}
+			
+			.coverAuthormNameBox {
+				overflow: hidden;
+				display: inherit;
+				position: absolute;
+				height: 20px;
+				width: 150px;
+				left: 90px;
+				top: 35px;
+			}
+			
+			.othersBar {
+				display: inline-block;
+				height: 74px;
+				width: 170px;
+				position: relative;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			
+			.loveButton {
+				display: inherit;
+				position: absolute;
+				top: 50%;
+				left: 10px;
+				margin-top: -10px;
+				margin-right: 10px;
+			}
+			
+			.listButton {
+				display: inherit;
+				position: absolute;
+				top: 50%;
+				left: 50px;
+				margin-top: -10px;
+				margin-right: 10px;
+			}
+			
+			.lrcButton {
+				display: inherit;
+				position: absolute;
+				top: 50%;
+				left: 90px;
+				margin-top: -15px;
+				margin-right: 10px;
+			}
+			
+			.moreButton {
+				display: inherit;
+				position: absolute;
+				top: 50%;
+				left: 130px;
+				margin-top: -13px;
+				margin-right: 10px;
+			}
+			
+			.icon {
+				font-family: "Glyphicons Halflings";
+				cursor: pointer;
+			}
+			
+			.icon-sm {
+				display: inline-block;
+				font-size: 25px;
+				transition: 0.3s;
+			}
+			
+			.icon-red {
+				color: #f06d6a;
+			}
+			
+			.icon-black {
+				color: gray;
+			}
+			
+			.icon-orange {
+				color: orangered;
+			}
+			
+			.fa-icon-sm {
+				display: inline-block;
+				font-size: 20px;
+				transition: 0.3s;
+				cursor: pointer;
+			}
+			
+			.icon-default {
+				display: inline-block;
+				font-size: 40px;
+				transition: 0.3s;
+			}
+			
+			.playerListBox {
+				position: fixed;
+				bottom: 80px;
+				right: 15px;
+				z-index: 100;
+				display: none;
+			}
+			
+			.playerList {
+				height: 475px;
+				width: 470px;
+				padding: 20px;
+				background-color: #fff;
+				box-sizing: border-box;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+			}
+			
+			.titleBar {
+				position: relative;
+				width: 100%;
+			}
+			
+			.titleBar .moreBtn {
+				position: absolute;
+				top: 5px;
+				right: 10px;
+				font-size: 18px;
+				color: gray;
+			}
+			
+			.userBox,
+			.operationListGroup {
+				width: 230px;
+				padding: 10px;
+				margin-top: 10px;
+			}
+			
+			.userAvatar {
+				width: 100%;
+			}
+			
+			.userName {
+				padding: 10px;
+				width: 100%;
+				text-align: center;
+				font-weight: bolder;
+				font-size: 20px;
+				color: #4a4a4a;
+			}
+			
+			.userInfo {
+				width: 100%;
+				font-weight: 300;
+				color: #4a4a4a;
+			}
+			
+			.rankingListContainer {
+				position: relative;
+				width: 100%;
+				height: 400px;
+				margin: 5px;
+			}
+			
+			.rankingListContentBox {
+				position: absolute;
+				padding: 5px 15px;
+				width: 100%;
+				height: 400px;
+				margin: 5px;
+			}
+			
+			.rankingListContentLeft {
+				display: inline-block;
+				width: 30%;
+			}
+			
+			.rankingListContentCover {
+				position: absolute;
+				top: 50%;
+				left: 5%;
+				margin-top: -75px;
+				display: inline-block;
+				vertical-align: middle;
+				width: 200px;
+				height: 200px;
+				background: url(img/lamp.jpg);
+				background-size: cover;
+			}
+			
+			.rankingListContentRight {
+				display: inline-block;
+				padding: 10px 15px;
+				color: white;
+				width: 70%;
+			}
+			
+			.rankingListBackgroundBox {
+				position: absolute;
+				width: 100%;
+				height: 400px;
+				background: url(img/lamp.jpg);
+				background-size: cover;
+				background-position: 50%;
+				filter: brightness(35%);
+				border-radius: 2px;
+				box-shadow: 3px 3px 15px rgb(0, 0, 0);
+			}
+			
+			.rotate30 {
+				transform: perspective(1000px) rotateY(30deg);
+			}
+			
+			.rankingListTitle {
+				font-size: 20px;
+				font-weight: bold;
+				color: #FFFFFF;
+				border-bottom: solid white 3px;
+			}
+			
+			.rankingListTable>tbody>tr>td {
+				height: 50px;
+				border-top: 0px solid #ddd;
+				vertical-align: middle;
+			}
+			
+			.rankingListTable>tbody>tr {
+				transition: 0.3s;
+			}
+			
+			.indexSpan {
+				display: inline;
+				transition: 0.3s;
+			}
+			
+			.playSpan {
+				display: none;
+				font-size: 18px;
+				cursor: pointer;
+				transition: 0.5s;
+			}
+			
+			.rankingListTable>tbody>tr:hover .indexSpan {
+				display: none;
+			}
+			
+			.rankingListTable>tbody>tr:hover .playSpan {
+				display: inline;
+			}
+			
+			.rankingListTable>tbody>tr:hover {
+				background: rgba(255, 255, 255, 0.2);
+			}
+			
+			body {
+				margin-top: 51px;
+				margin-bottom: 76px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" style="background: white;">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a href="#"><img style="margin-top: 10px;margin-right: 15px;" src="img/logoko_small.png"></a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#"><strong>发现音乐</strong></a>
+						</li>
+						<li>
+							<a href="#">我的音乐</a>
+						</li>
+						<li>
+							<a href="#">动态</a>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#">欢迎您，Tim</a>
+						</li>
+						<li class="dropdown">
+							<img src="img/timg.jpg" style="margin-top: 10px;" class="img-circle avatarSmall dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" />
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">修改信息</a>
+								</li>
+								<li>
+									<a href="#">修改密码</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a href="#">退出登录</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<form class="navbar-form navbar-right">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="站内搜索">
+								<span class="input-group-btn">
+		          					<button type="submit" class="btn btn-default">搜索</button>
+		          				</span>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container" style="padding: 0px;background: white;">
+			<div id="carouselRow" class="row clearfix">
+				<div class="col-md-12 column">
+					<div class="carousel slide" id="carousel-397889">
+						<ol class="carousel-indicators">
+							<li class="active" data-slide-to="0" data-target="#carousel-397889">
+							</li>
+							<li data-slide-to="1" data-target="#carousel-397889">
+							</li>
+							<li data-slide-to="2" data-target="#carousel-397889">
+							</li>
+						</ol>
+						<div class="carousel-inner">
+							<div class="item active">
+								<img alt="" src="img/ppt1.jpg" />
+								<div class="carousel-caption">
+								</div>
+							</div>
+							<div class="item">
+								<img alt="" src="img/ppt2.jpg" />
+								<div class="carousel-caption">
+								</div>
+							</div>
+							<div class="item">
+								<img alt="" src="img/ppt3.jpg" />
+								<div class="carousel-caption">
+								</div>
+							</div>
+						</div>
+						<a class="left carousel-control" href="#carousel-397889" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+						<a class="right carousel-control" href="#carousel-397889" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+					</div>
+				</div>
+			</div>
+			<div class="post">
+				<div id="mainRow" class="row clearfix">
+
+					<div class="col-lg-3">
+						<div class="userBox">
+							<div class="userAvatar">
+								<img class="center-block img-circle img-thumbnail avatarController" src="img/timg.jpg" />
+								<div class="userName">
+									Tim
+								</div>
+							</div>
+							<div class="userInfo">
+								<div class="well">这个人很懒，什么都没有留下</div>
+							</div>
+							<hr />
+						</div>
+						<div class="operationListGroup">
+							<li class="recommendedTitleLi"><span class="recommendedLiTitle">推荐</span></li>
+							<li class="recommendedLi"><span class="recommendedMinText">排行榜</span></li>
+							<li class="recommendedLi"><span class="recommendedMinText">专辑</span></li>
+							<li class="recommendedLi"><span class="recommendedMinText">歌单</span></li>
+							<li class="recommendedLi"><span class="recommendedMinText">流派</span></li>
+						</div>
+					</div>
+					<div class="col-lg-9">
+						<div id="recommendedBox" class="recommendedBox">
+							<div class="titleBar">
+								<h2>热门推荐</h2>
+								<a class="moreBtn">更多</a>
+								<hr />
+							</div>
+							<div class="mediaBox">
+								<div class="InputCoverBox">
+									<div class="InputCover3"></div>
+									<div class="InputCover2"></div>
+									<div class="InputCover1" style="background-image: url(img/lamp.jpg);">
+										<div class="InputCoverClickNumBox">
+											<span class="icon glyphicon-play"></span> 5000
+										</div>
+										<div class="InputCoverOperationBar">
+											<span class="fa fa-play-circle-o icon-orange" aria-hidden="true"></span>
+										</div>
+									</div>
+								</div>
+								<div class="mediaInfo">
+									<div class="mediaName">
+										<span>lamp</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>α·pav</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>2019-5-10</span>
+									</div>
+								</div>
+							</div>
+							<div class="mediaBox">
+								<div class="InputCoverBox">
+									<div class="InputCover3"></div>
+									<div class="InputCover2"></div>
+									<div class="InputCover1" style="background-image: url(img/lamp.jpg);">
+										<div class="InputCoverClickNumBox">
+											5000
+										</div>
+										<div class="InputCoverOperationBar">
+											<span class="fa fa-play-circle-o icon-orange" aria-hidden="true"></span>
+										</div>
+									</div>
+								</div>
+								<div class="mediaInfo">
+									<div class="mediaName">
+										<span>lamp</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>α·pav</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>2019-5-10</span>
+									</div>
+								</div>
+							</div>
+							<div class="mediaBox">
+								<div class="InputCoverBox">
+									<div class="InputCover3"></div>
+									<div class="InputCover2"></div>
+									<div class="InputCover1" style="background-image: url(img/lamp.jpg);">
+										<div class="InputCoverClickNumBox">
+											5000
+										</div>
+										<div class="InputCoverOperationBar">
+											<span class="fa fa-play-circle-o icon-orange" aria-hidden="true"></span>
+										</div>
+									</div>
+								</div>
+								<div class="mediaInfo">
+									<div class="mediaName">
+										<span>lamp</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>α·pav</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>2019-5-10</span>
+									</div>
+								</div>
+							</div>
+							<div class="mediaBox">
+								<div class="InputCoverBox">
+									<div class="InputCover3"></div>
+									<div class="InputCover2"></div>
+									<div class="InputCover1" style="background-image: url(img/lamp.jpg);">
+										<div class="InputCoverClickNumBox">
+											5000
+										</div>
+										<div class="InputCoverOperationBar">
+											<span class="fa fa-play-circle-o icon-orange" aria-hidden="true"></span>
+										</div>
+									</div>
+								</div>
+								<div class="mediaInfo">
+									<div class="mediaName">
+										<span>lamp</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>α·pav</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>2019-5-10</span>
+									</div>
+								</div>
+							</div>
+							<div class="mediaBox">
+								<div class="InputCoverBox">
+									<div class="InputCover3"></div>
+									<div class="InputCover2"></div>
+									<div class="InputCover1" style="background-image: url(img/lamp.jpg);">
+										<div class="InputCoverClickNumBox">
+											5000
+										</div>
+										<div class="InputCoverOperationBar">
+											<span class="fa fa-play-circle-o icon-orange" aria-hidden="true"></span>
+										</div>
+									</div>
+								</div>
+								<div class="mediaInfo">
+									<div class="mediaName">
+										<span>lamp</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>α·pav</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>2019-5-10</span>
+									</div>
+								</div>
+							</div>
+							<div class="mediaBox">
+								<div class="InputCoverBox">
+									<div class="InputCover3"></div>
+									<div class="InputCover2"></div>
+									<div class="InputCover1" style="background-image: url(img/lamp.jpg);">
+										<div class="InputCoverClickNumBox">
+											5000
+										</div>
+										<div class="InputCoverOperationBar">
+											<span class="fa fa-play-circle-o icon-orange" aria-hidden="true"></span>
+										</div>
+									</div>
+								</div>
+								<div class="mediaInfo">
+									<div class="mediaName">
+										<span>lamp</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>α·pav</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>2019-5-10</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="newMusicBox">
+							<div class="titleBar">
+								<h2>新歌速递</h2>
+								<a class="moreBtn">更多</span>
+								</a>
+								<hr />
+							</div>
+							<div class="mediaBox">
+								<div class="InputCoverBox">
+									<div class="InputCover3"></div>
+									<div class="InputCover2"></div>
+									<div class="InputCover1" style="background-image: url(img/lamp.jpg);">
+										<div class="InputCoverClickNumBox">
+											5000
+										</div>
+										<div class="InputCoverOperationBar">
+											<span class="fa fa-play-circle-o icon-orange" aria-hidden="true"></span>
+										</div>
+									</div>
+								</div>
+								<div class="mediaInfo">
+									<div class="mediaName">
+										<span>lamp</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>α·pav</span>
+									</div>
+									<div class="mediaAuthor">
+										<span>2019-5-10</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="rankingListContainer">
+							<div class="rankingListBackgroundBox"></div>
+							<div class="rankingListContentBox">
+								<div class="rankingListTitle">
+									<h3>排行榜</h3>
+								</div>
+								<div class="rankingListContentLeft">
+									<div class="rankingListContentCover center-block rotate30 pull-left"></div>
+								</div>
+								<div class="rankingListContentRight pull-right">
+									<br />
+									<table class="table rankingListTable">
+										<tr>
+											<td><span class="indexSpan">01</span><span class="fa fa-play-circle-o icon-orange  playSpan"></span></td>
+											<td>Believer</td>
+											<td>Goldfrapp</td>
+											<td>03:44</td>
+										</tr>
+										<tr>
+											<td><span class="indexSpan">02</span><span class="fa fa-play-circle-o icon-orange  playSpan"></span></td>
+											<td>Believer</td>
+											<td>Goldfrapp</td>
+											<td>03:44</td>
+										</tr>
+										<tr>
+											<td><span class="indexSpan">03</span><span class="fa fa-play-circle-o icon-orange  playSpan"></span></td>
+											<td>Believer</td>
+											<td>Goldfrapp</td>
+											<td>03:44</td>
+										</tr>
+										<tr>
+											<td><span class="indexSpan">04</span><span class="fa fa-play-circle-o icon-orange  playSpan"></span></td>
+											<td>Believer</td>
+											<td>Goldfrapp</td>
+											<td>03:44</td>
+										</tr>
+										<tr>
+											<td><span class="indexSpan">05</span><span class="fa fa-play-circle-o icon-orange  playSpan"></span></td>
+											<td>Believer</td>
+											<td>Goldfrapp</td>
+											<td>03:44</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="footer"></div>
+		</div>
+
+		<!--播放器-->
+
+		<div class="playerListBox">
+			<div class="playerList"></div>
+		</div>
+		<div class=" navbar-fixed-bottom" style="background: white;border-top: ghostwhite 1px solid;">
+			<div class="container">
+				<div class="col-lg-12">
+					<div class="playerBar notSelect">
+						<div class="coverBar">
+							<div class="coverBox">
+								<img class="img-thumbnail coverImg" src="img/default_album.jpg" />
+							</div>
+							<div class="coverMusicNameBox">
+								<span class="coverMusicName">一个得过且过的勇者</span>
+							</div>
+							<div class="coverAuthormNameBox">
+								<span class="coverAuthorName">α·pav</span>
+							</div>
+						</div>
+						<div class="controllerBar">
+							<div class="preButton">
+								<span class='icon glyphicon-step-backward icon-sm icon-red'></span>
+							</div>
+							<div id="Play" class="playButton">
+								<span class="icon glyphicon-play icon-default icon-red"></span>
+							</div>
+							<div class="nextButton">
+								<span class="icon glyphicon-step-forward icon-sm icon-red"></span>
+							</div>
+						</div>
+						<div class="processBar">
+							<div class="processAll"></div>
+							<div class="processNow"></div>
+							<div class="processButton"></div>
+							<div class="songInfoBox">
+								<span class="songInfo">00:00&nbsp;|&nbsp;00:00</span>
+							</div>
+						</div>
+						<div class="othersBar">
+							<div class="loveButton">
+								<span class="fa fa-heart-o fa-icon-sm icon-red"></span>
+							</div>
+							<div class="listButton">
+								<span class="fa fa-bars fa-icon-sm  icon-black"></span>
+							</div>
+							<div class="lrcButton">
+								<span class="icon fa-icon-sm icon-black">词</span>
+							</div>
+							<div class="moreButton">
+								<div class="dropup">
+									<span class="icon glyphicon-option-horizontal fa-icon-sm  icon-black" data-toggle="dropdown"></span>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">下载</a>
+										</li>
+										<li>
+											<a href="#">评论</a>
+										</li>
+										<li>
+											<a href="#">加入歌单</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function() {
+			var $audio = $(window.parent.frames["musicPlayerFrame"].document).find("#player");
+			var audio = $(window.parent.frames["musicPlayerFrame"].document).find("#player").get(0);
+			var isdragProcessBar = false;
+
+			if($("#Play").children().hasClass('glyphicon-play') && !audio.paused) {
+				$("#Play").children("span").removeClass("glyphicon-play").addClass("glyphicon-pause");
+			}
+			$(".playerBar").show(500);
+			$("#Play").on('click', function() {
+				if(audio.paused) {
+					if($(this).children().hasClass('glyphicon-play')) {
+						Play();
+					}
+				} else {
+					Pause();
+				}
+			}); // Button cilick
+
+			function Play() {
+				$("#Play").children("span").removeClass("glyphicon-play").addClass("glyphicon-pause");
+				audio.play();
+			} //Play()
+
+			$audio.on("play", TimeSpan());
+			$audio.on("pause", function() {
+				if(audio.ended) {
+					audio.currentTime = 0;
+					audio.src = "res/Arne_Haruka Nakamura.mp3";
+					Play();
+				}
+			});
+
+			function Pause() {
+				$("#Play").children("span").removeClass("glyphicon-pause").addClass("glyphicon-play");
+				audio.pause();
+			} //Pause()
+
+			function TimeSpan() {
+				if(!isdragProcessBar) {
+					var ProcessNow = 0;
+					setInterval(function() {
+						ProcessNow = (audio.currentTime / audio.duration) * 280;
+						$(".processNow").css("width", ProcessNow);
+						$(".processButton").css("left", ProcessNow);
+						var currentTime = timeFormat(audio.currentTime);
+						var timeAll = timeFormat(TimeAll());
+						$(".songInfo").html(currentTime + " / " + timeAll);
+					}, 1000);
+				}
+			} //TimeSpan()
+			function timeFormat(number) {
+				var minute = parseInt(number / 60);
+				var second = parseInt(number % 60);
+				minute = minute >= 10 ? minute : "0" + minute;
+				second = second >= 10 ? second : "0" + second;
+				return minute + ":" + second;
+			} //timeFormat()
+
+			function TimeAll() {
+				return audio.duration;
+			} //TimeAll()
+
+			var oldX = 0;
+			var left = 0;
+			var pleft = 0;
+			var pleftAll = $(".processAll").width();
+			var newLeft = 0;
+			$(".processButton").on("mousedown", function(e) {
+				oldX = e.pageX;
+				left = 0;
+				isdragProcessBar = true;
+				pleft = $(".processButton").position().left;
+				$("#isDrag").html("true ");
+			})
+			$(document).on("mousemove", function(e) {
+				if(isdragProcessBar) {
+					left = e.pageX - oldX;
+					newLeft = left + pleft;
+					if(newLeft < 0) {
+						newLeft = 0;
+					}
+					if(newLeft > pleftAll) {
+						newLeft = pleftAll;
+					}
+					var perDuration = newLeft / $(".processAll").width();
+					var time = TimeAll() * perDuration;
+					audio.currentTime = time;
+					var currentTime = timeFormat(time);
+					var timeAll = timeFormat(TimeAll());
+					$(".songInfo").html(currentTime + " | " + timeAll);
+					$(".processNow").css("width", newLeft);
+					$(".processButton").css("left", newLeft);
+				}
+			})
+			$(document).on("mouseup", function() {
+				isdragProcessBar = false;
+				$("#isDrag").html("false");
+			})
+
+			$(".lrcButton").on("click", function() {
+				if($(".listButton").find("span").hasClass("icon-red")) {
+					$(".listButton").find("span").removeClass("icon-red").addClass("icon-black");
+					$('.playerListBox').fadeToggle(200);
+				}
+				if($(".lrcButton").find("span").hasClass("icon-red")) {
+					$(".lrcButton").find("span").removeClass("icon-red").addClass("icon-black");
+					$('.playerListBox').fadeToggle(200);
+				} else if($(".lrcButton").find("span").hasClass("icon-black")) {
+					$(".lrcButton").find("span").removeClass("icon-black").addClass("icon-red");
+					$('.playerListBox').fadeToggle(200);
+				}
+			})
+
+			$(".listButton").on("click", function() {
+				if($(".lrcButton").find("span").hasClass("icon-red")) {
+					$(".lrcButton").find("span").removeClass("icon-red").addClass("icon-black");
+					$('.playerListBox').fadeToggle(200);
+				}
+				if($(".listButton").find("span").hasClass("icon-red")) {
+					$(".listButton").find("span").removeClass("icon-red").addClass("icon-black");
+					$('.playerListBox').fadeToggle(200);
+				} else if($(".listButton").find("span").hasClass("icon-black")) {
+					$(".listButton").find("span").removeClass("icon-black").addClass("icon-red");
+					$('.playerListBox').fadeToggle(200);
+				}
+			})
+
+			$(".loveButton").on("click", function() {
+				if($(".loveButton").find("span").hasClass("fa-heart-o")) {
+					$(".loveButton").find("span").removeClass("fa-heart-o").addClass("fa-heart");
+				} else if($(".loveButton").find("span").hasClass("fa-heart")) {
+					$(".loveButton").find("span").removeClass("fa-heart").addClass("fa-heart-o");
+				}
+			})
+		})
+	</script>
+
+</html>
